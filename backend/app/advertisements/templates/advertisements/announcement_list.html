@@ -1,0 +1,24 @@
+{% extends "advertisements/base_generic.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Announcements</h2>
+    <div class="row">
+        <!-- Итерация по всем объявлениям -->
+        {% for announcement in announcements %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="card-title"><a href="{% url 'announcement_detail' pk=announcement.pk %}" class="stretched-link">{{ announcement.title }}</a></h3>
+                        <p class="card-text">{{ announcement.content|truncatewords:20 }}</p> <!-- Отображаем первые 20 слов содержимого объявления -->
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-md-12">
+                <p>No announcements available.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

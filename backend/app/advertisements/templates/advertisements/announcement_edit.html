@@ -1,0 +1,31 @@
+{% extends 'advertisements/base_generic.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="mb-4">Edit Announcement</h1>
+            <form method="POST" class="needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="form-group">
+                    <!-- Итерация по каждому полю в форме для применения стилей Bootstrap -->
+                    {% for field in form %}
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field|add_class:"form-control" }}
+                        {% if field.help_text %}
+                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <div class="invalid-feedback">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

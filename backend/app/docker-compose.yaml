@@ -1,0 +1,18 @@
+version: '3.1'  # используйте подходящую для вас версию
+
+services:
+
+  db:
+    image: postgres:latest  # или конкретная версия, например postgres:13
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: admin  # Установите пароль
+      POSTGRES_USER: admin  # Установите пользователя
+      POSTGRES_DB: app_test  # Установите имя БД
+    ports:
+      - "5433:5432"  # прокидываем порт наружу, чтобы он был доступен локально
+    volumes:
+      - test_postgres_data:/var/lib/postgresql/data  # Укажите новое персистентное хранилище данных
+
+volumes:
+  test_postgres_data:
